@@ -1,0 +1,19 @@
+# hyp.yaml
+lr0: 0.01
+momentum: 0.937
+weight_decay: 0.0005
+warmup_epochs: 3.0
+warmup_momentum: 0.8
+warmup_bias_lr: 0.1
+
+# Augmentations
+degrees: 10.0 # image rotation (+/- deg)
+translate: 0.1 # image translation (+/- fraction)
+scale: 0.5     # image scale (+/- gain)
+shear: 2.0     # image shear (+/- deg)
+perspective: 0.0 # image perspective (+/- fraction)
+flipud: 0.0    # image flip up-down (probability)
+fliplr: 0.5    # image flip left-right (probability)
+mosaic: 1.0    # mosaic augmentation (probability)
+mixup: 0.1     # mixup augmentation (probability)
+copy_paste: 0.0 # segment copy-paste (probability)

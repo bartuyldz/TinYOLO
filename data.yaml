@@ -2,4 +2,4 @@ train: images/train
 val: images/val
 
 nc: 2  # class sayısı
-names: ['blue_m&m', 'red_m&m']
+names: ['blue_mm', 'red_mm']
