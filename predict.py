@@ -4,10 +4,10 @@ from ultralytics import YOLO
 model = YOLO("runs/detect/train16/weights/best.pt")  # Eğer en iyi ağırlıklarınız "best.pt" olarak kaydedildiyse
 
 # Tahmin yapmak istediğiniz görüntü dosyasının yolunu belirtin
-image_path = "test_image1.JPG"
+image_path = "test_images/test2.jpeg"
 
 # Model üzerinde tahmini çalıştırın
-results = model.predict(image_path)
+results = model.predict(image_path,save= True)
 
 # Sonuçları inceleyin
 for result in results:
@@ -21,7 +21,7 @@ for result in results:
         confidence = box.conf[0]
         class_id = int(box.cls[0])
         class_name = model.names[class_id]
-        print(f"Nesne: {class_name}, Güven: {confidence:.2f}, Koordinatlar: ({x1:.0f}, {y1:.0f}), ({x2:.0f}, {y2:.0f})")
+        print(f"Nesne: {class_name},Nesne: {class_id}, Güven: {confidence:.2f}, Koordinatlar: ({x1:.0f}, {y1:.0f}), ({x2:.0f}, {y2:.0f})")
 
     # (İsteğe bağlı) Tespit edilen nesnelerin üzerine kutuları ve etiketleri çizerek görselleştirebilirsiniz
     # Örneğin:

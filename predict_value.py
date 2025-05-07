@@ -7,6 +7,9 @@ model = YOLO("runs/detect/train16/weights/best.pt")
 # Webcam'i başlat (0 genellikle varsayılan kameradır)
 cap = cv2.VideoCapture(0)
 
+def sendID(classID):
+    return class_id
+
 while True:
     # Kameradan bir kare oku
     ret, frame = cap.read()
@@ -33,12 +36,17 @@ while True:
                 # Sınıf adı
                 class_name = model.names[cls]
 
+                # Sınıf ID'si
+                class_id = int(box.cls[0])
+
+                sendID(class_id)
+
                 if conf > 0.5:  # İsteğe bağlı: Sadece belirli bir güven skorunun üzerindeki tespitleri göster
                     # Bounding box'ı çiz
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
                     # Etiketi oluştur
-                    label = f'{class_name}: {conf:.2f}'
+                    label = f'{class_name},{class_id} : {conf:.2f}'
                     # Etiketi çiz
                     cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
