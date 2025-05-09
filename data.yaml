@@ -1,5 +1,5 @@
-train: images/train
-val: images/val
+train: ./images/train
+val: ./images/val
 
-nc: 2  # class sayısı
-names: ['blue_mm', 'red_mm']
+nc: 6  # class sayısı
+names: ['c0', 'c1','c2', 'c3','c4', 'c5']  # sınıf isimleri

@@ -1,30 +1,39 @@
 import os
 import urllib.parse
 
-# Nerede label dosyaları varsa
+# Label dosyalarının bulunduğu klasör
 label_folder = 'labels'
 renamed = 0
+skipped = 0
 
 for filename in os.listdir(label_folder):
     if not filename.endswith('.txt'):
         continue
 
-    # Orijinal isim: b1afe73d__Users%5CBartu%5CDESKTOP%5C...%5CIMG_2655.jpg.txt
+    # Dosya adı çözümlemesi
     parts = filename.split('__')
     if len(parts) != 2:
         continue
 
-    encoded_path = parts[1].replace('.txt', '')  # %5CIMG_2655.jpg
-    decoded_path = urllib.parse.unquote(encoded_path)  # IMG_2655.jpg
+    encoded_path = parts[1] # URL encoded kısmı alıyoruz
+    decoded_path = urllib.parse.unquote(encoded_path)  # URL çözümlemesi yapılıyor
 
-    basename = os.path.basename(decoded_path)  # IMG_2655.jpg
-    name_only = os.path.splitext(basename)[0]  # IMG_2655
+    basename = os.path.basename(decoded_path)  # WIN_20250506_23_46_45_Pro (2).txt
 
-    new_filename = f"{name_only}.txt"
-    os.rename(
-        os.path.join(label_folder, filename),
-        os.path.join(label_folder, new_filename)
-    )
+    # Yeni dosya adı, .txt uzantısı korunuyor
+    new_filename = basename  # Pro kısmı korunuyor
+
+    old_path = os.path.join(label_folder, filename)
+    new_path = os.path.join(label_folder, new_filename)
+
+    # Dosya zaten varsa atlanır
+    if os.path.exists(new_path):
+        print(f"Atlandı (zaten var): {new_filename}")
+        skipped += 1
+        continue
+
+    os.rename(old_path, new_path)
+    print(f"Yeniden adlandırıldı: {filename} → {new_filename}")
     renamed += 1
 
-print(f"{renamed} label dosyası yeniden adlandırıldı.")
+print(f"\n{renamed} dosya yeniden adlandırıldı, {skipped} dosya atlandı (zaten vardı).")
