@@ -1,0 +1,20 @@
+import sys
+import select
+import time
+
+while True:
+    if sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
+        line = sys.stdin.readline().strip()
+
+        try:
+            color_id = int(line)
+            print("Gelen color_id:", color_id)
+
+            # 🔧 Burada işlem yapabilirsin
+            # Örnek: time.sleep(2) → motor döndürme süresi gibi
+            time.sleep(1)  # İşlem süresi simülasyonu
+
+            # 🚀 İşlem bitti, bilgisayara "devam edebilirsin" sinyali gönder
+            print("NEXT")  # Bu bilgisayardaki readline() ile yakalanacak
+        except ValueError:
+            print("Geçersiz veri:", line)
