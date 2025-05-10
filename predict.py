@@ -1,10 +1,10 @@
 from ultralytics import YOLO
 
 # Daha önce eğittiğiniz veya yüklediğiniz modeli yükleyin
-model = YOLO("runs/detect/train16/weights/best.pt")  # Eğer en iyi ağırlıklarınız "best.pt" olarak kaydedildiyse
+model = YOLO("runs/detect/lasttrain/weights/best.pt")  # Eğer en iyi ağırlıklarınız "best.pt" olarak kaydedildiyse
 
 # Tahmin yapmak istediğiniz görüntü dosyasının yolunu belirtin
-image_path = "./test_images/test3.jpeg"
+image_path = "./test_images/test.jpeg"
 
 # Model üzerinde tahmini çalıştırın
 results = model.predict(image_path, save=True, conf=0.72, iou=0.4)  # save=True ile tahmin edilen görüntüyü kaydedebilirsiniz
